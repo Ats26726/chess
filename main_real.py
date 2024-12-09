@@ -5,8 +5,7 @@
 # pawn promotion
 
 import pygame
-from a_constants import *
-from a_functions import *
+from constants import *
 
 pygame.init()
 
