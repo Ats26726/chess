@@ -37,8 +37,8 @@ def tablero():
                        'Negras: elige una pieza para mover', 'Negras: elige un destino']
         screen.blit(pygame.font.Font('freesansbold.ttf', size_parameter//25).render(status_text[turn_step], True, 'black'), (size_parameter/50, size_parameter*82/100))
         for i in range(9):
-            pygame.draw.line(screen, 'black', (0, size_parameter/10 * i), (size_parameter*4/5, size_parameter/10 * i), size_parameter//500)
-            pygame.draw.line(screen, 'black', (size_parameter/10 * i, 0), (size_parameter/10 * i, size_parameter*4/5), size_parameter//500)
+            pygame.draw.line(screen, 'black', (0, size_parameter/10 * i), (size_parameter*4/5, size_parameter/10 * i), size_parameter//500 +1)
+            pygame.draw.line(screen, 'black', (size_parameter/10 * i, 0), (size_parameter/10 * i, size_parameter*4/5), size_parameter//500 +1)
         screen.blit(pygame.font.Font('freesansbold.ttf', size_parameter//30).render('Rendirse', True, 'black'), (size_parameter*81/100, size_parameter*83/100))
         if white_promote or black_promote:
             pygame.draw.rect(screen, 'gray', [0, size_parameter*4/5, size_parameter - size_parameter/5, size_parameter/10])
@@ -57,7 +57,7 @@ def draw_pieces():
         if turn_step < 2:
             if selection == i:
                 pygame.draw.rect(screen, 'red', [white_locations[i][0] * size_parameter/10 + size_parameter/1000, white_locations[i][1] * size_parameter/10 + size_parameter/1000,
-                                                 size_parameter/10, size_parameter/10], size_parameter//500)
+                                                 size_parameter/10, size_parameter/10], size_parameter//500 +1)
 
     for i in range(len(black_pieces)):
         index = piece_list.index(black_pieces[i])
@@ -68,7 +68,7 @@ def draw_pieces():
         if turn_step >= 2:
             if selection == i:
                 pygame.draw.rect(screen, 'blue', [black_locations[i][0] * size_parameter/10 + size_parameter/1000, black_locations[i][1] * size_parameter/10 + size_parameter/1000,
-                                                  size_parameter/10, size_parameter/10], size_parameter//500)
+                                                  size_parameter/10, size_parameter/10], size_parameter//500 +1)
 
 
 # function to check all pieces valid options on board
@@ -450,8 +450,8 @@ def draw_promotion():
 def check_promo_select():
     mouse_pos = pygame.mouse.get_pos()
     left_click = pygame.mouse.get_pressed()[0]
-    x_pos = mouse_pos[0] // 100
-    y_pos = mouse_pos[1] // 100
+    x_pos = int(mouse_pos[0] // (size_parameter/10))
+    y_pos = int(mouse_pos[1] // (size_parameter*9/100))
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
         white_pieces[promo_index] = white_promotions[y_pos]
     elif black_promote and left_click and x_pos > 7 and y_pos < 4:
