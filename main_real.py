@@ -457,6 +457,11 @@ def check_promo_select():
     elif black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
 
+def draw_leyenda():
+    if pygame.key.get_pressed()[pygame.K_e] == 1:
+        screen.blit(pygame.transform.scale(pygame.image.load(os.path.join(script_dir, 'legend.png')), (size_parameter, size_parameter)), (0, size_parameter/-10))
+
+
 
 # main game loop
 black_options = check_options(black_pieces, black_locations, 'black')
